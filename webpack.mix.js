@@ -11,7 +11,21 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
-    .postCss('resources/css/app.css', 'public/css', [
-        //
-    ]);
+if (mix.inProduction()) mix.version();
+
+mix.js('resources/js/app.js', 'public/js');
+
+mix.browserSync({
+  ui: false,
+  injectChanges: true,
+  notify: false,
+  proxy: '127.0.0.1:8000',
+});
+    
+mix.postCss('resources/css/app.css', 'public/css', [
+  require('tailwindcss')
+]);
+
+mix.disableSuccessNotifications();
+
+
