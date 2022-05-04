@@ -1,12 +1,19 @@
 {
-    "private": true,
-    "scripts": {
-        "dev": "php artisan serve"
-    },
-    "devDependencies": {
-        "axios": "^0.21",
-        "laravel-mix": "^6.0.6",
-        "lodash": "^4.17.19",
-        "postcss": "^8.1.14"
-    }
+  "private": true,
+  "scripts": {
+    "dev": "concurrently \"mix watch\" \"php artisan serve\" --kill-others",
+    "production": "mix --production"
+  },
+  "devDependencies": {
+    "@tailwindcss/forms": "^0.5.1",
+    "@tailwindcss/typography": "^0.5.2",
+    "axios": "^0.21",
+    "browser-sync": "^2.27.9",
+    "browser-sync-webpack-plugin": "^2.3.0",
+    "concurrently": "^7.1.0",
+    "laravel-mix": "^6.0.6",
+    "lodash": "^4.17.19",
+    "postcss": "^8.1.14",
+    "tailwindcss": "^3.0.24"
+  }
 }
