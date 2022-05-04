@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +15,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', function(Request $request) {
+
+  if(!$request->session()->has('visits')) Log::info('No visits found');
+
+  $request->session()->increment('visits');
+
+  $data = [
+    'name' => 'Thim',
+    'visits' => $request->session()->get('visits', 1),
+    'ip' => $request->ip(),
+    'path' => $request->path()
+  ];
+
+  return view('index', $data);
 });
