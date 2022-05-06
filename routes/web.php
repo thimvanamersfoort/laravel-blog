@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
+use App\Models\Post;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,4 +30,9 @@ Route::get('/', function(Request $request) {
   ];
 
   return view('index', $data);
+});
+
+Route::get('/login', function(Request $request){
+
+  // Add Controller for logging in
 });
