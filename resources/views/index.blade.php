@@ -13,7 +13,15 @@
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 max-h-screen">
     <div class="max-w-2xl mx-auto flex flex-col min-h-screen">
 
-      <h1 class="text-black text-6xl font-bold mt-16">Hello {{ $name }}</h1>
+      <h1 class="text-black text-6xl font-bold mt-16">
+        Hello 
+        @if (Auth::user())
+          {{ Auth::user()->name }}
+        @else
+          Guest
+        @endif
+        
+      </h1>
 
       <p class="text-gray-900 mt-6 text-lg">
         Welcome to my small blog, made in Laravel. This is a personal project, which is made
@@ -27,6 +35,12 @@
         <li><b>Updating config files to make use of .SQLITE-file</b></li>
         <li><b>Creating custom HTTP Controllers for each route</b></li>
       </ul>
+
+      @if (Auth::user())
+        <a href="/logout" class="text-center font-semibold py-4 px-4 text-black bg-white rounded-xl border border-black max-w-max transition-all duration-200 mt-8 focus:bg-black focus:text-white hover:bg-black hover:text-white">Log out as {{ Auth::user()->name }}</a>
+      @else
+        <a href="/login" class="text-center font-semibold py-4 px-4 text-black bg-white rounded-xl border border-black max-w-max transition-all duration-200 mt-8 focus:bg-black focus:text-white hover:bg-black hover:text-white">Log in </a>
+      @endif
 
       <div class="mt-auto mb-[5vh]">
         <dl class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-3">
