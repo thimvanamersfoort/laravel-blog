@@ -17,20 +17,28 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+
+            $table->boolean('is_admin')->default(false);
+
             $table->string('name');
+            $table->string('first_name')->default('');
+            $table->string('last_name')->default('');
+
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
+
             $table->string('password');
             $table->rememberToken();
-            $table->timestamps();
 
-            
+            $table->timestamps();
         });
 
         // Set default user
         $user = new User();
 
+        $user->is_admin = true;
         $user->name = 'admin';
+        $user->first_name = 'Administrator';
         $user->password = Hash::make('12345');
         $user->email = 'admin@localhost';
         
