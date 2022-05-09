@@ -1,11 +1,13 @@
 <?php
 
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,8 +26,8 @@ Route::get('/', function(Request $request) {
 
   $request->session()->increment('visits');
   
-  $user = $request->user();
-  dump($user);
+  // $user = $request->user();
+  // dump($user);
 
   $data = [
     'visits' => $request->session()->get('visits', 1),
@@ -34,9 +36,14 @@ Route::get('/', function(Request $request) {
   ];
 
   return view('index', $data);
-});
+})->name('index');
 
-Route::get('/login', [UserController::class, 'show']);
+Route::get('/login', [UserController::class, 'show'])->name('login');
 Route::post('/login', [UserController::class, 'login']);
 
 Route::get('/logout', [UserController::class, 'logout']);
+
+Route::resource('posts', PostController::class)
+  ->missing(function (Request $request) {
+    return Redirect::route('posts.index');
+  });
