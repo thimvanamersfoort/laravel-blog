@@ -7,12 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
-  use HasFactory;
+    use HasFactory;
 
-  // Primary key info
-  protected $primaryKey = 'postId';
-  protected $keyType = 'string';
-  public $incrementing = false;
-
-
+    public function user() 
+    {
+      return $this->belongsTo(User::class);
+    }
 }
