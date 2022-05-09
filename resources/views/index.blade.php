@@ -15,7 +15,9 @@
 
       <h1 class="text-black text-6xl font-bold mt-16">
         Hello 
-        @if (Auth::user())
+        @if (Auth::user() && Auth::user()->first_name !== '')
+          {{ Auth::user()->first_name }}
+        @elseif (Auth::user())
           {{ Auth::user()->name }}
         @else
           Guest
@@ -25,22 +27,26 @@
 
       <p class="text-gray-900 mt-6 text-lg">
         Welcome to my small blog, made in Laravel. This is a personal project, which is made
-        to help me understand the Laravel Framework better. Targets for this website:
+        to help me understand the Laravel Framework better. Features of this website:
       </p>
 
-      <ul class="text-gray-700 mt-8 text-lg list-disc list-inside space-y-2">
-        <li><b>Basic CRUD trough Models:</b> Understanding the models and what kind of CRUD they can execute. Model code available everywhere? </li>
-        <li><b>Creating Views with Blade</b></li>
-        <li><b>Routes that render views and check on session variables</b></li>
-        <li><b>Updating config files to make use of .SQLITE-file</b></li>
-        <li><b>Creating custom HTTP Controllers for each route</b></li>
+      <ul class="text-gray-900 mt-8 text-lg list-disc list-inside space-y-3 font-semibold leading-6">
+        <li>Named <code class="bg-gray-300 px-1 text-gray-700 rounded-sm">/post</code> resource routes with included Auth middleware.</li>
+        <li>Eloquent Database Models + One-To-Many Relationship linking.</li>
+        <li>Laravel default User Authentication, stored in session state.</li>
+        <li>Makes use of MySQL, only run <code class="bg-gray-300 px-1 text-gray-700 rounded-sm">php artisan migrate</code> to configure the database.</li>
+        <li>Included Laravel Telescope at <code class="bg-gray-300 px-1 text-gray-700 rounded-sm">/telescope</code> for debugging purposes.</li>
       </ul>
 
-      @if (Auth::user())
-        <a href="/logout" class="text-center font-semibold py-4 px-4 text-black bg-white rounded-xl border border-black max-w-max transition-all duration-200 mt-8 focus:bg-black focus:text-white hover:bg-black hover:text-white">Log out as {{ Auth::user()->name }}</a>
-      @else
-        <a href="/login" class="text-center font-semibold py-4 px-4 text-black bg-white rounded-xl border border-black max-w-max transition-all duration-200 mt-8 focus:bg-black focus:text-white hover:bg-black hover:text-white">Log in </a>
-      @endif
+      <div>
+        @if (Auth::user())
+          <a href="/logout" class="text-center inline-block font-semibold py-4 px-4 text-black bg-white rounded-xl border border-black max-w-max transition-all duration-200 mt-8 focus:bg-black focus:text-white hover:bg-black hover:text-white">Log out as {{ Auth::user()->name }}</a>
+        @else
+          <a href="/login" class="text-center inline-block font-semibold py-4 px-4 text-black bg-white rounded-xl border border-black max-w-max transition-all duration-200 mt-8 focus:bg-black focus:text-white hover:bg-black hover:text-white">Log in</a>
+        @endif
+
+        <a href="/posts" class="ml-2 text-center inline-block font-semibold py-4 px-4 text-black bg-white rounded-xl border border-black max-w-max transition-all duration-200 mt-8 focus:bg-black focus:text-white hover:bg-black hover:text-white">See posts</a>
+      </div>
 
       <div class="mt-auto mb-[5vh]">
         <dl class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-3">

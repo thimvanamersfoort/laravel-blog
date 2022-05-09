@@ -25,7 +25,6 @@ class UserController extends Controller
 
       $request->session()->regenerate();
 
-      dump($request->session());
       return redirect('/');
     }
 
