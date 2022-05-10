@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redirect;
 
 class PostController extends Controller
@@ -85,7 +86,7 @@ class PostController extends Controller
         return Redirect::to('/posts/'.$post->id);
       }
 
-      return Redirect::to('/');
+      return view('posts.edit', [ 'post' => $post]);
     }
 
     /**
@@ -108,6 +109,8 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+      dump($post);
+
+      return route('posts.index');
     }
 }

@@ -24,9 +24,9 @@
         </div>
 
         <div class="relative">
-          <label for="contents" class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium text-gray-900">Write your story</label>
+          <label for="content" class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium text-gray-900">Write your story</label>
           <div class="mt-1">
-            <textarea rows="5" name="contents" id="contents" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-lg" placeholder="Contents of your blogpost. Text only."></textarea>
+            <textarea rows="5" name="content" id="content" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-lg" placeholder="content of your blogpost. Text only."></textarea>
           </div>
         </div>
 
