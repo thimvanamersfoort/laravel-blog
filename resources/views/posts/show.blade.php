@@ -23,28 +23,23 @@
         @endif        
       </div>
 
-      <p class="mt-12 text-gray-800"> {{ Str::ucfirst($post->content)  }}</p>
+      {{-- First, escape any unescaped HTML. Then convert \n to <br>. Str::ucfirst is to capitalize the first letter. --}}
+      <p class="mt-12 text-gray-800"> {!! Str::ucfirst(nl2br(htmlentities($post->content))) !!}</p>
 
-      <a href="/posts" class="mt-20 text-gray-800 border-2 border-gray-600 hover:shadow-md hover:border-black hover:text-black py-4 px-6 rounded-lg max-w-fit font-medium transition-all duration-150">
-        <span class="relative top-[2px]">Back to posts</span>
-
-        <svg xmlns="http://www.w3.org/2000/svg" class="ml-2 relative inline-block w-7 h-7" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-          <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-          <path d="M9 11l-4 4l4 4m-4 -4h11a4 4 0 0 0 0 -8h-1" />
-        </svg>
-      </a>
+      <a href="/posts" class="text-center mt-20 inline-block font-semibold py-[0.875rem] px-6 text-black bg-white rounded-xl border border-black max-w-max transition-all duration-200 focus:bg-black focus:text-white hover:bg-black hover:text-white">Back to posts</a>
       
       <h3 class="mt-20 font-semibold text-3xl">About the Author</h3>
       <div class="flex flex-row justify-between mt-6">
 
         <div class="flex flex-row items-center">
-          <img class="h-10 w-10 rounded-full" src="https://www.pngitem.com/pimgs/m/4-40070_user-staff-man-profile-user-account-icon-jpg.png" alt="">
+          <img class="h-10 w-10 rounded-full" src="https://avatars.dicebear.com/api/initials/{{ substr($post->user->name, 0, 2) }}.svg?background=%23000" alt="">
           <p class="inline-block h-min text-xl ml-4 relative">{{ Str::ucfirst($post->user->name) }}</p>
         </div>
 
-        @if (Auth::user() == $post->user)
-          <a href="/posts/{{ $post->id }}/edit" class="text-gray-800 border-2 border-gray-600 hover:shadow-md hover:border-black hover:text-black py-3 px-6 rounded-lg max-w-fit font-medium transition-all duration-150">
-            <span class="relative top-[3px]">Edit</span>
+        @if (Auth::user()->id === $post->user->id)
+
+          <a href="/posts/{{ $post->id }}/edit" class="text-center inline-block font-semibold py-[0.875rem] px-6 text-black bg-white rounded-xl border border-black max-w-max transition-all duration-200 focus:bg-black focus:text-white hover:bg-black hover:text-white">
+            Edit
 
             <svg xmlns="http://www.w3.org/2000/svg" class="ml-2 relative inline-block w-6 h-6" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
               <path stroke="none" d="M0 0h24v24H0z" fill="none"/>

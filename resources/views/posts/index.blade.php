@@ -17,7 +17,7 @@
 
       <div class="grid grid-cols-1 gap-y-2 mt-12">
 
-        @foreach (App\Models\Post::all() as $post)
+        @foreach (App\Models\Post::all()->reverse() as $post)
 
           <a href="/posts/{{ $post->id }}" class="border-2 rounded-lg py-4 px-6 border-gray-400 hover:shadow-md hover:border-black duration-200 transition-all flex justify-between">
             <div>
@@ -26,8 +26,8 @@
             </div>
 
             <div class="flex flex-col items-end">
-              <img class="h-10 w-10 rounded-full" src="https://www.pngitem.com/pimgs/m/4-40070_user-staff-man-profile-user-account-icon-jpg.png" alt="">
-              <p class="text-indigo-500 text-sm font-bold text-right mt-2 leading-4  w-20">{{ $post->user->name }}</p>
+              <img class="h-10 w-10 rounded-full" src="https://avatars.dicebear.com/api/initials/{{ substr($post->user->name, 0, 2) }}.svg?background=%23000" alt="">
+              <p class="text-indigo-500 text-sm font-bold text-right mt-2 leading-4 w-32">{{ $post->user->name }}</p>
             </div>
           </a>
         @endforeach
@@ -42,11 +42,8 @@
           @endif  
   
           <a href="/" class="text-center ml-2 inline-block font-semibold py-[0.875rem] px-6 text-black bg-white rounded-xl border border-black max-w-max transition-all duration-200 focus:bg-black focus:text-white hover:bg-black hover:text-white">Back home</a>
+          
         </div>
-      
-
-
-
 
     </div>
   </div>

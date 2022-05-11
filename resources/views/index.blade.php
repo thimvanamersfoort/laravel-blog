@@ -31,11 +31,13 @@
       </p>
 
       <ul class="text-gray-900 mt-8 text-lg list-disc list-inside space-y-3 font-semibold leading-6">
-        <li>Named <code class="bg-gray-300 px-1 text-gray-700 rounded-sm">/post</code> resource routes with included Auth middleware.</li>
+        <li>Named <code class="bg-gray-300 px-1 text-gray-700 rounded-sm">/posts</code> resource routes with included Auth middleware.</li>
         <li>Eloquent Database Models + One-To-Many Relationship linking.</li>
         <li>Laravel default User Authentication, stored in session state.</li>
+        <li>Form input validation and HTML character escaping, to prevent XSS attacks.</li>
         <li>Makes use of MySQL, only run <code class="bg-gray-300 px-1 text-gray-700 rounded-sm">php artisan migrate</code> to configure the database.</li>
         <li>Included Laravel Telescope at <code class="bg-gray-300 px-1 text-gray-700 rounded-sm">/telescope</code> for debugging purposes.</li>
+        <li>Custom User Icons using <a href="https://avatars.dicebear.com/" target="_blank" class="underline">DiceBear Avatars</a>.</li>
       </ul>
 
       <div>
