@@ -36,7 +36,7 @@
           <p class="inline-block h-min text-xl ml-4 relative">{{ Str::ucfirst($post->user->name) }}</p>
         </div>
 
-        @if (Auth::user()->id === $post->user->id)
+        @if (Auth::user() && Auth::user()->id === $post->user->id)
 
           <a href="/posts/{{ $post->id }}/edit" class="text-center inline-block font-semibold py-[0.875rem] px-6 text-black bg-white rounded-xl border border-black max-w-max transition-all duration-200 focus:bg-black focus:text-white hover:bg-black hover:text-white">
             Edit

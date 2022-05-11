@@ -21,7 +21,7 @@ A simple `Laravel` blog, with a `TailwindCSS` front-end. Made as a hobby project
 2. `npm install` and `composer install` to install all dependencies to your local system.
 3. Rename `.example.env` to `.env`, and run `php artisan key:generate`.
 4. Create a local MySQL database called *laravel_test*, or change to your preferred options in the Environment Variables.
-5. Run `php artisan vendor:publish` and `php artisan migrate` to set up your vendor packages and tables.
+5. Run `php artisan migrate` to set up your database tables.
 
 **To run your application:** `npm run dev`
 

@@ -29,7 +29,7 @@ class UserController extends Controller
     }
 
     return back()->withErrors([
-      'username' => 'De gebruikersnaam en/of het wachtwoord zijn incorrect.'
+      'username' => 'The username and/or password are incorrect.'
     ])->onlyInput('email');
   }
 
