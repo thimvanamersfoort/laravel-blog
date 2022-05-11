@@ -17,8 +17,8 @@ class UserController extends Controller
   public function login(Request $request) {
 
     $credentials = $request->validate([
-      'name' => 'required',
-      'password' => 'required'
+      'name' => 'required|max:255',
+      'password' => 'required|max:255'
     ]);
 
     if(Auth::attempt($credentials)){

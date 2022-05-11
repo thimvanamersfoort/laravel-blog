@@ -11,11 +11,10 @@ use Illuminate\Support\Facades\Redirect;
 class PostController extends Controller
 {
     /**
-     * Lists all posts
+     * Middleware to enable authentication 
      *
-     * @return \Illuminate\Http\Response
+     * @return null
      */
-
     public function __construct()
     {
         // Middleware only applied to these methods
@@ -30,9 +29,13 @@ class PostController extends Controller
         ]);
     }
 
+    /**
+     * Show the index page with all posts
+     * 
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
-        
       return view('posts.index');
     }
 
@@ -43,24 +46,31 @@ class PostController extends Controller
      */
     public function create()
     {
-      // Returns view posts.create
-
-
       return view('posts.create');
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created post in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {   
-      // First validate the input
-      // Then add it to the database with Post Model
-      // Redirect user to the view, using Post ID retrieved from the database
-        return Redirect::route('index');
+      $data = $request->validate([
+        'title' => 'required|unique:posts,title|max:255|string',
+        'content' => 'required|string',
+      ]);
+
+      $post = Post::firstOrNew([
+        'title' => $data['title'],
+        'content' => $data['content'],
+        'user_id' => Auth::user()->id
+      ]);
+
+      $post->save();
+      
+      return Redirect::to('/posts/'.$post->id);
     }
 
     /**
@@ -90,7 +100,7 @@ class PostController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified post in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Post  $post
@@ -98,19 +108,28 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-      //
+      $data = $request->validate([
+        'title' => 'required|max:255|string',
+        'content' => 'required|string',
+      ]);
+
+      $post->title = $data['title'];
+      $post->content = $data['content'];
+      $post->save();
+
+      return Redirect::to('/posts/'.$post->id);
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified post from storage.
      *
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
     public function destroy(Post $post)
     {
-      dump($post);
+      $post->delete();
 
-      return route('posts.index');
+      return Redirect::route('posts.index');
     }
 }
