@@ -25,6 +25,28 @@ A simple `Laravel` blog, with a `TailwindCSS` front-end. Made as a hobby project
 
 **To run your application:** `npm run dev`
 
+---
+
+You can log in with **admin** and password **12345**. You can also create your own user within *artisan tinker*:
+
+```php
+// use App\Models\User;
+
+$user = new User();
+
+// Required attributes:
+$user->name = 'YOUR_USERNAME';
+$user->email = 'YOUR_EMAIL@test.com';
+$user->password = Hash::make('YOUR_PASSWORD');
+
+// Optional attributes:
+$user->is_admin = true;
+$user->first_name = 'YOUR_FIRST_NAME';
+$user->last_name = 'YOUR_LAST_NAME';
+
+$user->save();
+```
+
 ### Optional
 
 To make use of [`Laravel Telescope`](https://laravel.com/docs/9.x/telescope), for an extended debugging toolset, run the following commands:

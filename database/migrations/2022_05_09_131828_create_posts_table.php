@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Post;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Log;
@@ -30,6 +31,15 @@ class CreatePostsTable extends Migration
 
           Log::info('Created Posts table');
         });
+
+        $post = new Post();
+        $post->title = 'Hello World';
+        $post->content = 'Welcome to this simple Laravel Blog, powered by TailwindCSS.'. PHP_EOL .
+        'Made by Thim van A'. PHP_EOL . PHP_EOL .
+        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex fugiat esse blanditiis aperiam veritatis commodi tenetur nam reprehenderit voluptatibus dolorum mollitia, quae vitae consequatur tempora incidunt tempore repudiandae placeat nihil laboriosam? Quaerat, quasi ad vero laudantium, fugit quia ut odit nam reiciendis itaque consectetur, recusandae debitis rem aut nesciunt neque!';
+        $post->user_id = 1;
+        $post->save();
+
       }
     }
 
